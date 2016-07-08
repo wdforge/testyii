@@ -9,7 +9,6 @@
 	<script>
 
 		$(document).ready(function(){
-			$('#find-result').html('<h3>test</h3>');
 
 			$('#formFindBook').submit(function(e){
 				// подготовка данных к отправке
