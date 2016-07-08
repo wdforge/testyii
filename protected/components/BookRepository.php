@@ -32,6 +32,7 @@ class BookRepository extends AbstractRepository {
 		$params = [
 
 			'table' => ['b' => 'book'],
+			
 			'join' => [
 				[
 					['bv' => 'book_version'],
@@ -45,8 +46,8 @@ class BookRepository extends AbstractRepository {
 				],
 				[
 					['ba' => 'book_author'],
-					'ba.book_id = b.book_id',
-					['book_id'],
+					'ba.book_id = bv.book_id',
+					[],
 				],
 				[
 					['a' => 'author'],
@@ -54,14 +55,17 @@ class BookRepository extends AbstractRepository {
 					['author_id'],
 				],
 			],
+			'group'=>[
+				'b.book_name', 'bv.book_date'
+			],
 		];
 
-		if(isset($findParams['book_name'])) {
-			$params['where'][] = 'b.book_name = "%'.strval($findParams['book_name']).'%"';
+		if(!empty($findParams['book_name'])) {
+			$params['where'][] = 'b.book_name like "%'.$findParams['book_name'].'%"';
 		}
 
-		if(isset($findParams['author_id'])) {
-			$params['where'][] = 'a.author_id in ('.implode(',', $findParams['author_id']).')';
+		if(!empty($findParams['author_id'])) {
+			$params['where'][] = 'a.author_name like "%'.$findParams['author_name'].'%"';
 		}
 
 		return $this->findAll($params);

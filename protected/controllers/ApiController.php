@@ -8,7 +8,7 @@ class ApiController extends ApiBaseController {
 	// Все параметры поиска передаются в виде ассоциированного массива, что дает некоторую универсальность метода.
 	public function actionFind() {
 
-		$findParams = Yii::app()->request->getQuery('findParams');
+		$findParams = Yii::app()->request->getParam('findParams');
 
 		$bookRepository = new BookRepository(
 			Yii::app()->params->zend['db']
@@ -24,7 +24,7 @@ class ApiController extends ApiBaseController {
 	// Пункт №2 - Сформировать заказ (ID-книги, кол-во)
 	public function actionSetOrder() {
 
-		$orderAddParams = Yii::app()->request->getQuery('orderAddParams');
+		$orderAddParams = Yii::app()->request->getParam('orderAddParams');
 
 		$orderRepository = new OrderRepository(
 			Yii::app()->params->zend['db']
@@ -40,7 +40,7 @@ class ApiController extends ApiBaseController {
 	// Пункт №3 - Оформить заказ
 	public function actionSetStatusOrder() {
 
-		$orderAddParams = Yii::app()->request->getQuery('statusOrderParams');
+		$orderAddParams = Yii::app()->request->getParam('statusOrderParams');
 
 		$orderRepository = new OrderRepository(
 			Yii::app()->params->zend['db']

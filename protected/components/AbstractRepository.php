@@ -95,6 +95,9 @@ abstract class AbstractRepository {
 				if (!empty($params['limit']))
 					$select->limit($params['limit']);
 
+				if (!empty($params['group']))
+					$select->group($params['group']);
+
 				if (!empty($params['order']))
 					$select->order($params['order']);
 

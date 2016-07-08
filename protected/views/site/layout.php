@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Тестовое задание реализации API с использованием YII - фреймворк</title>
+	<title>Тестовое задание реализации API с использованием YII - фреймворка</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 
@@ -30,7 +30,7 @@
 					scriptCharset:'utf-8'}).
 
 				success(function(obj) {	
-					
+					// очистка области вывода					
 					$('#find-result').children().each(function(){
 						$(this).remove();
 					});
@@ -40,8 +40,6 @@
 						$('#find-result').html($('#find-result').html()+
 							'<div>'+obj.items[i].book_name+'('+obj.items[i].book_date+')'+'</div>'
 						);
-
-	                    console.log();
 					}
 				});
 
@@ -60,8 +58,7 @@
 	<div id="find-form" class="form">
 		<h2>Поиск</h2>
 		<label for="author">Поиск по названию:</label><input type="text" id="book_name" name="findParams[book_name]"/><br/>
-		<label for="book_author">Поиск по автору:</label><input type="text" id="findParams[book_author]"/><br/>
-		<label for="book_so_author">Поиск по со-автору:</label><input type="text" id="findParams[book_so_author]"/>&nbsp;<button id="find_button">Искать</button>
+		<label for="book_author">Поиск по автору:</label><input type="text" name="findParams[author_name]"/>&nbsp;<button>Искать</button>
 	</div>
 	</form>
 </td>
