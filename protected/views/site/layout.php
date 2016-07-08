@@ -2,37 +2,43 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>TEST</title>
+	<title>Тестовое задание реализации API с использованием YII - фреймворк</title>
 	<link rel="stylesheet" type="text/css" href="/css/style.css"></link>
 	<script type="text/javascript" src="/js/jquery.min.js"></script>
 
 	<script>
+
 		$(document).ready(function(){
+
 			$('#formFindBook').submit(function(e){
-				alert('submit');
+				// подготовка данных к отправке
+				var send = {};
+				$('#formFindBook').find('input').each(function(e, el){
+					if (typeof($(el).attr('name')) != "undefined") {
+						send[$(el).attr('name')] = $(el).val();
+					}					
+				});
+
+				// отправка				
+				$.post({ url: $('#formFindBook').attr('action'), 
+					cache:true,
+					data: send,
+					async:true, 
+					dataType:'json',
+					scriptCharset:'utf-8'}).
+
+				success(function(obj) {				
+					jQuery('#find-result').html(obj);
+				});
+
+   				return false;
 			});
-
-		});
-/*
-		$('#find_button').click(function(){
-			alert('find')
 		});
 
-		$('#addtoorder_button').click(function(){
-			alert('addtoorder_button')
-		});
-
-
-		$('#initorder_button').click(function(){
-			alert('initorder_button')
-		});
-*/
 	</script>
 
 </head>
-
 <body>
-<h1>TEST</h1>
 <table>
 <tr>
 <td>
