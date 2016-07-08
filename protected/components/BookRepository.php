@@ -64,7 +64,7 @@ class BookRepository extends AbstractRepository {
 			$params['where'][] = 'b.book_name like "%'.$findParams['book_name'].'%"';
 		}
 
-		if(!empty($findParams['author_id'])) {
+		if(!empty($findParams['author_name'])) {
 			$params['where'][] = 'a.author_name like "%'.$findParams['author_name'].'%"';
 		}
 
