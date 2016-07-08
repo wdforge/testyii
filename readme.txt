@@ -1,7 +1,15 @@
 ﻿Развертывание проекта:
 
-composer install
+php composer.phar install
 
 
-Composer:
+Composer можно взять:
 https://getcomposer.org/download/
+
+
+База данных: 
+protected/data/create.sql
+
+
+Точка входа:
+public/index.php
