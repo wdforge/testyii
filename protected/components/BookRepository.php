@@ -8,13 +8,26 @@ class BookRepository extends AbstractRepository {
 
 	public function getAll() {
 
+		$this->setEntityClass('BookItem');
+		return $this->findByParams([]);
 	}
 
+	// По хорошему у авторов должен быть свой репозиторий
+	// Но в тестовом проекте можем нарушить концепцию
 	public function getAllAuthors() {
 
+		$this->setEntityClass('AuthorItem');
+
+		$params = [
+			'table' => ['authors'],
+		];
+
+		return $this->findAll($params);
 	}
 
 	public function findByParams($findParams) {
+
+		$this->setEntityClass('BookItem');
 
 		$params = [
 
@@ -51,7 +64,7 @@ class BookRepository extends AbstractRepository {
 			$params['where'][] = 'a.author_id in ('.implode(',', $findParams['author_id']).')';
 		}
 
-		$result = $this->findAll($params);
+		return $this->findAll($params);
 	}
 
 }
