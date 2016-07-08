@@ -7,4 +7,11 @@ class OrderRepository extends AbstractRepository {
 		$this->setEntityClass('OrderItem');
 	}
 
+	public function newOrder($orderAddParams) {
+		
+	}
+
+	public function getAll() {
+
+	}
 }

@@ -6,7 +6,15 @@ class BookRepository extends AbstractRepository {
 		parent::__construct($config, 'BookItem');
 	}
 
-	public function getBooksLikeName() {
+	public function getAll() {
+
+	}
+
+	public function getAllAuthors() {
+
+	}
+
+	public function findByParams($findParams) {
 
 		$params = [
 
@@ -35,6 +43,13 @@ class BookRepository extends AbstractRepository {
 			],
 		];
 
+		if(isset($findParams['book_name'])) {
+			$params['where'][] = 'b.book_name = "%'.strval($findParams['book_name']).'%"';
+		}
+
+		if(isset($findParams['author_id'])) {
+			$params['where'][] = 'a.author_id in ('.implode(',', $findParams['author_id']).')';
+		}
 
 		$result = $this->findAll($params);
 	}
