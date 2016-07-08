@@ -101,8 +101,6 @@ abstract class AbstractItem implements \JsonSerializable {
 			$arrayed['type'] = $this->getType();
 			$arrayed['id'] = $this->getId();
 		} catch (Exception $e) {
-			var_dump($e->getTraceAsString());
-			die();
 		}
 		return $arrayed;
 	}

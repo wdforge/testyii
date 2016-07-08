@@ -1,6 +1,6 @@
 <?php
 
-class ApiController extends CController {
+class ApiController extends ApiBaseController {
 
 	public $defaultAction = 'index';
 
@@ -17,6 +17,7 @@ class ApiController extends CController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$bookRepository->findByParams($findParams)
+				->getArrayCopy()
 		);
 	}
 
@@ -32,6 +33,7 @@ class ApiController extends CController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$orderRepository->newOrder($orderAddParams)
+				->getArrayCopy()
 		);
 	}
 
@@ -47,6 +49,7 @@ class ApiController extends CController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$orderRepository->newOrder($orderAddParams)
+				->getArrayCopy()
 		);
 	}
 
@@ -62,9 +65,9 @@ class ApiController extends CController {
 		);
 
 		$this->renderJSON([
-			'books' => $bookRepository->getAll(),
-			'orders' => $orderRepository->getAll(),
-			'authors' => $bookRepository->getAllAuthors()
+			'books' => $bookRepository->getAll()->getArrayCopy(),
+			'orders' => $orderRepository->getAll()->getArrayCopy(),
+			'authors' => $bookRepository->getAllAuthors()->getArrayCopy()
 		]);
 	}
 

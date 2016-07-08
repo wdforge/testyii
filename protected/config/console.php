@@ -1,4 +1,5 @@
-﻿<?php
+<?php
+
 return [
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Yii Book Test',
