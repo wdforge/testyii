@@ -1,0 +1,50 @@
+{
+
+    "config":{
+        "vendor-dir": "./vendor/"
+    },
+
+    "extra": {
+
+        "yiicomposer-paths":{
+            "module": "{vendor}/modules/{name}",
+            "extension":"{vendor}/extensions/{name}",
+            "framework": "{vendor}/yiisoft/yii",
+            "yiisoft/yii": "$framework$"
+        },
+
+        "yiicomposer-console-config":"protected/config/console.php",
+        "yiicomposer-console-commands":[
+            {
+                "controller":"migrate"
+            },
+            {
+                "controller":"test",
+                "action": "test",
+                "params": {
+                    "param1": "value1",
+                    "param2": "value2",
+                    "param3": "value3"
+                }
+            }
+        ]
+    },
+
+    "scripts":{
+        "post-update-cmd": "YiiComposer\\Console::update"
+    },
+
+    "authors": [
+        {
+            "name": "Yurii Dolgiy",
+            "email": "wdforge@gmail.com"
+        }
+    ],
+
+	"require": {
+		"php": ">=5.3.2",
+		"yiisoft/yii": "1.1.*",
+        "zendframework/zend-db": "^2.7",
+	    "mihaildev/yiicomposer": "dev-master"
+	}
+}

@@ -1,0 +1,7 @@
+*.log
+*.lock
+vendor/*
+.idea
+.idea/*
+nbproject
+nbproject/*
