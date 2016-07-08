@@ -22,8 +22,9 @@ class ApiController extends ApiBaseController {
 	}
 
 	// Пункт №2 - Сформировать заказ (ID-книги, кол-во)
-	public function actionSetOrder() {
+	public function actionAddOrder() {
 
+		// возвращаем данные в виде JSON
 		$orderAddParams = Yii::app()->request->getParam('orderAddParams');
 
 		$orderRepository = new OrderRepository(
@@ -33,14 +34,14 @@ class ApiController extends ApiBaseController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$orderRepository->newOrder($orderAddParams)
-				->getArrayCopy()
 		);
 	}
 
-	// Пункт №3 - Оформить заказ
-	public function actionSetStatusOrder() {
 
-		$orderAddParams = Yii::app()->request->getParam('statusOrderParams');
+	// Пункт №3 - Оформить заказ
+	public function actionStatusOrder() {
+
+		$orderAddParams = Yii::app()->request->getParam('orderStatParams');
 
 		$orderRepository = new OrderRepository(
 			Yii::app()->params->zend['db']
@@ -48,8 +49,7 @@ class ApiController extends ApiBaseController {
 
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
-			$orderRepository->newOrder($orderAddParams)
-				->getArrayCopy()
+			$orderRepository->statusOrder($orderAddParams)		
 		);
 	}
 

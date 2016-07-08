@@ -32,7 +32,7 @@ class BookRepository extends AbstractRepository {
 		$params = [
 
 			'table' => ['b' => 'book'],
-			
+
 			'join' => [
 				[
 					['bv' => 'book_version'],

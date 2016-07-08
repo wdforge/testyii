@@ -44,6 +44,77 @@
 
    				return false;
 			});
+
+
+			$('#formAddOrder').submit(function(e){
+				// подготовка данных к отправке
+				var send = {};
+
+				$('#formAddOrder').find('input').each(function(e, el){
+					if (typeof($(el).attr('name')) != "undefined") {
+						send[$(el).attr('name')] = $(el).val();
+					}					
+				});
+
+				// отправка				
+				$.post({ url: $('#formAddOrder').attr('action'), 
+					cache:true,
+					data: send,
+					async:true, 
+					dataType:'json',
+					scriptCharset:'utf-8'}).
+
+				success(function(obj) {	
+
+					// очистка области вывода					
+					$('#addorder-result').children().each(function(){
+						$(this).remove();
+					});
+
+					$('#addorder-result').html($('#addorder-result').html()+
+						'<div>'+'('+obj.order+')'+'</div>'
+					);
+				});
+				
+				return false;
+   					
+			});
+
+
+			$('#formStatOrder').submit(function(e){
+				// подготовка данных к отправке
+				var send = {};
+
+				$('#formStatOrder').find('input').each(function(e, el){
+					if (typeof($(el).attr('name')) != "undefined") {
+						send[$(el).attr('name')] = $(el).val();
+					}					
+				});
+
+				// отправка				
+				$.post({ url: $('#formStatOrder').attr('action'), 
+					cache:true,
+					data: send,
+					async:true, 
+					dataType:'json',
+					scriptCharset:'utf-8'}).
+
+				success(function(obj) {	
+
+					// очистка области вывода					
+					$('#statorder-result').children().each(function(){
+						$(this).remove();
+					});
+
+					$('#statorder-result').html($('#statorder-result').html()+
+						'<div>'+obj.status+'</div>'
+					);
+				});
+				
+				return false;
+   					
+			});
+
 		});
 
 	</script>
@@ -54,10 +125,10 @@
 <tr>
 <td>
 	<form action="/api/find" method="post" id="formFindBook">
-	<div id="find-form" class="form">
+	<div class="form">
 		<h2>Поиск</h2>
 		<label for="author">Поиск по названию:</label><input type="text" id="book_name" name="findParams[book_name]"/><br/>
-		<label for="book_author">Поиск по автору:</label><input type="text" name="findParams[author_name]"/>&nbsp;<button>Искать</button>
+		<label for="book_author">Поиск по автору:</label><input type="text" id="author_name" name="findParams[author_name]"/>&nbsp;<button>Искать</button>
 	</div>
 	</form>
 </td>
@@ -65,28 +136,28 @@
 	<div id="find-result" class="result"></div>
 </td></tr>
 <tr><td>
-	<form action="/api/add-order" method="post">
-	<div id="addtoorder-form" class="form">
+	<form action="/api/addorder" method="post" id="formAddOrder">
+	<div class="form">
 		<h2>Добавление в заказ</h2>
-		<label for="book_id">ID-книги:</label><input type="text" id="book_id"/><br/>
-		<label for="book_count">Количество:</label><input type="text" id="orderAddParams[book_count]"/>&nbsp;<button id="addtoorder_button">Добавить</button>
+		<label for="book_version_id">ID-книги:</label><input type="text" id="book_version_id" name="orderAddParams[book_version_id]"/><br/>
+		<label for="book_count">Количество:</label><input type="text" id="book_count" name="orderAddParams[book_count]"/>&nbsp;<button>Добавить</button>
 	</div>
 	</form>
 </td>
 <td>
-	<div id="addtoorder-form" class="result"></div>
+	<div id="addorder-result" class="result"></div>
 </td>
 </tr>
 <tr><td>
-	<form action="/api/status-order" method="post">
-	<div id="initorder-form" class="form">
+	<form action="/api/statusorder" method="post" id="formStatOrder">
+	<div class="form">
 		<h2>Оформить заказ</h2>
-		<label for="book_order_id">Номер заказа:</label><input type="text" id="book_order_id"/>&nbsp;<button id="initorder_button">Оформить</button>
+		<label for="book_order_id">Номер заказа:</label><input type="text" id="book_order_id" name="orderStatParams[book_order_id]"/>&nbsp;<button>Оформить</button>
 	</div>
 	</form>
 </td>
 <td>
-	<div id="initorder-form" class="result"></div>
+	<div id="statorder-result" class="result"></div>
 </td>
 </tr>
 </table>
