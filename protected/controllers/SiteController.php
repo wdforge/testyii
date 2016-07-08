@@ -6,4 +6,5 @@ class SiteController extends CController {
 
 		$this->render('layout', []);
 	}
+
 }

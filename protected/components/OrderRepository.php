@@ -6,4 +6,5 @@ class OrderRepository extends AbstractRepository {
 		$this->initConnection($config);
 		$this->setEntityClass('OrderItem');
 	}
+
 }

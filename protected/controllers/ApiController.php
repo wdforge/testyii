@@ -6,7 +6,7 @@ class ApiController extends CController {
 
 	// Пункт №1 - Получить перечень книг как результат поиска по названию, по автору, по соавторам.
 	// Все параметры поиска передаются в виде ассоциированного массива, что дает некоторую универсальность метода.
-	public function actionFind()  {
+	public function actionFind() {
 
 		$findParams = Yii::app()->request->getQuery('findParams');
 
@@ -17,7 +17,7 @@ class ApiController extends CController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$bookRepository->findByParams($findParams)
-		);		
+		);
 	}
 
 	// Пункт №2 - Сформировать заказ (ID-книги, кол-во)
@@ -47,9 +47,8 @@ class ApiController extends CController {
 		// возвращаем данные в виде JSON
 		$this->renderJSON(
 			$orderRepository->newOrder($orderAddParams)
-		);		
+		);
 	}
-
 
 	// Метод возвращающий различные данные для заполнения формы
 	public function actionIndex() {
@@ -63,9 +62,10 @@ class ApiController extends CController {
 		);
 
 		$this->renderJSON([
-			'books'  => $bookRepository->getAll(),
+			'books' => $bookRepository->getAll(),
 			'orders' => $orderRepository->getAll(),
 			'authors' => $bookRepository->getAllAuthors()
 		]);
 	}
+
 }
