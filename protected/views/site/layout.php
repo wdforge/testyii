@@ -9,10 +9,12 @@
 	<script>
 
 		$(document).ready(function(){
+			$('#find-result').html('<h3>test</h3>');
 
 			$('#formFindBook').submit(function(e){
 				// подготовка данных к отправке
 				var send = {};
+
 				$('#formFindBook').find('input').each(function(e, el){
 					if (typeof($(el).attr('name')) != "undefined") {
 						send[$(el).attr('name')] = $(el).val();
@@ -27,8 +29,20 @@
 					dataType:'json',
 					scriptCharset:'utf-8'}).
 
-				success(function(obj) {				
-					jQuery('#find-result').html(obj);
+				success(function(obj) {	
+					
+					$('#find-result').children().each(function(){
+						$(this).remove();
+					});
+
+					for(i in obj.items) {
+
+						$('#find-result').html($('#find-result').html()+
+							'<div>'+obj.items[i].book_name+'('+obj.items[i].book_date+')'+'</div>'
+						);
+
+	                    console.log();
+					}
 				});
 
    				return false;
